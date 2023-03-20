@@ -15,12 +15,12 @@ namespace Shop.Api.Repositories
         }
         public async Task<IEnumerable<ProductCategory>> GetAllCategoriesAsync()
         {
-            return  await _appDBContext.ProductCategories.ToListAsync();
+            return await _appDBContext.ProductCategories.ToListAsync();
         }
 
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
-            return await _appDBContext.Products.Include(x=>x.ProductCategory).ToListAsync();
+            return await _appDBContext.Products.Include(x => x.ProductCategory).ToListAsync();
         }
 
         public Task<ProductCategory> GetCategoryByIdAsync(int id)
@@ -28,9 +28,9 @@ namespace Shop.Api.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Product> GetProductByIdAsync(int id)
+        public async Task<Product> GetProductByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _appDBContext.Products.Include(x => x.ProductCategory).FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

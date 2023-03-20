@@ -27,5 +27,15 @@ namespace Shop.Api.Controllers
             
             return Ok(returnedItems);
         }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<ProductDto>> GetProductByIdAsync(int id)
+        {
+            var items = await _prodcutRepository.GetProductByIdAsync(id);
+            var returnedItems = _mapper.Map<ProductDto>(items);
+
+            return Ok(returnedItems);
+        }
+
     }
 }

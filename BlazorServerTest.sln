@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorServerTest", "BlazorS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{BCF018CF-2915-4291-A621-5CF974531587}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{6B523D3C-7E03-49CC-9CA7-8C7EC39E6FD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{6B523D3C-7E03-49CC-9CA7-8C7EC39E6FD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Api", "Shop.Api\Shop.Api.csproj", "{B95F665B-FBF0-4CE0-8B79-79C7786C1940}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Api", "Shop.Api\Shop.Api.csproj", "{B95F665B-FBF0-4CE0-8B79-79C7786C1940}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{9D5759A3-E2EA-4451-9CAE-A09A4739B6BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{9D5759A3-E2EA-4451-9CAE-A09A4739B6BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Web", "Shop.Web\Shop.Web.csproj", "{1818BF41-1C17-4583-BEBE-73F6A6006B33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{9D5759A3-E2EA-4451-9CAE-A09A4739B6BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D5759A3-E2EA-4451-9CAE-A09A4739B6BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D5759A3-E2EA-4451-9CAE-A09A4739B6BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1818BF41-1C17-4583-BEBE-73F6A6006B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1818BF41-1C17-4583-BEBE-73F6A6006B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1818BF41-1C17-4583-BEBE-73F6A6006B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1818BF41-1C17-4583-BEBE-73F6A6006B33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
