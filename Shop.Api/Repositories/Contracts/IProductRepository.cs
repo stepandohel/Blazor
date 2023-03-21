@@ -2,11 +2,14 @@
 
 namespace Shop.Api.Repositories.Contracts
 {
-    public interface IProdcutRepository
+    public interface IProductRepository
     {
         Task<IEnumerable<Product>> GetAllProductsAsync();
-        Task<IEnumerable<ProductCategory>> GetAllCategoriesAsync();
         Task<Product> GetProductByIdAsync(int id);
+        Task UpdateProductAsync(int id, Product product);
+        Task DeleteProductAsync(int id);
+        Task<IEnumerable<ProductCategory>> GetAllCategoriesAsync();
+
         Task<ProductCategory> GetCategoryByIdAsync(int id); 
     }
 }

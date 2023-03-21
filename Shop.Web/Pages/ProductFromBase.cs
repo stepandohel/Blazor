@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Models.Dtos;
 using Shop.Web.Services.Contracts;
 
 namespace Shop.Web.Pages
 {
-    public class ProductDetailsBase :  ComponentBase
+    public class ProductFromBase : ComponentBase
     {
         [Parameter]
         public int Id { get; set; }
@@ -12,20 +13,25 @@ namespace Shop.Web.Pages
         public IProductService productService { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
-        public ProductDto Product { get; set; }
+
+        public ProductDto Product { get; set; } 
+        public ProductDto updatedProduct { get; set; } = new ProductDto();
+
+        public EditContext editContext ;
+
+        public bool _isInit;
 
         protected override async Task OnInitializedAsync()
         {
             Product = await productService.GetProductsByIdAsync(Id);
+            editContext = new(Product);
+            _isInit=true;
         }
-        protected async Task DeleteProduct_Click(ProductDto product)
+
+        protected async Task UpdateProduct_Click()
         {
-            await productService.DeleteProductById(product);
+            await productService.UpdateProductById(Id,Product);
             NavigationManager.NavigateTo("/");
-        }
-        protected async Task SendToUpdateForm_Click(int id)
-        {
-            NavigationManager.NavigateTo($"/ProductForm/{id}");
         }
     }
 }

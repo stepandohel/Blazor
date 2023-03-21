@@ -20,6 +20,22 @@ else
                     @Product.Price.ToString("C")&nbsp;(@Product.Qty items in stock)
                 </b>
             </p>
+            <div>
+                <button class="btn btn-warning"
+                    @onclick="()=> DeleteProduct_Click(Product)">
+                    <b>
+                        Delete
+                    </b>
+                </button>
+            </div>
+            <div>
+                <button class="btn btn-access"
+                    @onclick="()=> SendToUpdateForm_Click(Product.Id)">
+                    <b>
+                        Delete
+                    </b>
+                </button>
+            </div>
         </div>
     </div>
 }

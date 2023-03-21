@@ -1,0 +1,23 @@
+﻿@page "/ProductForm/{id:int}"
+@using Models.Dtos;
+@inherits ProductFromBase
+
+@if(_isInit)
+{
+    <EditForm Model="@Product" OnValidSubmit="UpdateProduct_Click">
+    <!-- Name input -->
+    <div class="form-outline mb-4">
+        <InputText type="text" id="form4Example1" class="form-control" @bind-Value="@Product.Name"/>
+        <label class="form-label" for="form4Example1">Name</label>
+    </div>
+
+    <!-- Message input -->
+    <div class="form-outline mb-4">
+        <InputTextArea class="form-control" id="form4Example3" rows="4" @bind-Value="Product.Description"/>
+        <label class="form-label" for="form4Example3">Message</label>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+</EditForm>
+}

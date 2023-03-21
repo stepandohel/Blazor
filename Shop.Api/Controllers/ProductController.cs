@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Models.Dtos;
 using Shop.Api.Repositories.Contracts;
@@ -10,10 +11,10 @@ namespace Shop.Api.Controllers
 
     public class ProductController : ControllerBase
     {
-        private readonly IProdcutRepository _prodcutRepository;
+        private readonly IProductRepository _prodcutRepository;
         private readonly IMapper _mapper;
 
-        public ProductController(IProdcutRepository prodcutRepository, IMapper mapper)
+        public ProductController(IProductRepository prodcutRepository, IMapper mapper)
         {
             _prodcutRepository = prodcutRepository;
             _mapper = mapper;
@@ -37,5 +38,18 @@ namespace Shop.Api.Controllers
             return Ok(returnedItems);
         }
 
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeleteProductById(int id)
+        {
+            await _prodcutRepository.DeleteProductAsync(id);
+            return (NoContent());
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task UpdateProduct(int id, ProductDto productDto)
+        {
+            var item = _mapper.Map<Product>(productDto);
+            await _prodcutRepository.UpdateProductAsync(id, item);
+        }
     }
 }

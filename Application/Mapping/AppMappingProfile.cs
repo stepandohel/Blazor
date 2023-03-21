@@ -13,7 +13,7 @@ namespace Application.Mapping
     {
         public AppMappingProfile() 
         {
-            CreateMap<Product, ProductDto>();
+            CreateMap<Product, ProductDto>().ReverseMap();
         }
     }
 }
