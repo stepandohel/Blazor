@@ -13,6 +13,11 @@ namespace Shop.Web.Services
             _httpClient = httpClient;
         }
 
+        public async Task CreateProduct(ProductDto productDto)
+        {
+           var res = await _httpClient.PostAsJsonAsync<ProductDto>("api/Product", productDto);
+        }
+
         public async Task DeleteProductById(ProductDto product)
         {
             await _httpClient.DeleteAsync($"api/Product/{product.Id}");
@@ -30,9 +35,9 @@ namespace Shop.Web.Services
             return item;
         }
 
-        public Task UpdateProductById(int id, ProductDto product)
+        public async Task UpdateProductById(int id, ProductDto product)
         {
-            throw new NotImplementedException();
+            await _httpClient.PutAsJsonAsync($"api/Product/{id}", product);
         }
     }
 }

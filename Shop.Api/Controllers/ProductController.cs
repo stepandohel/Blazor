@@ -51,5 +51,12 @@ namespace Shop.Api.Controllers
             var item = _mapper.Map<Product>(productDto);
             await _prodcutRepository.UpdateProductAsync(id, item);
         }
+
+        [HttpPost]
+        public async Task CreateProduct(ProductDto productDto)
+        {
+            var item = _mapper.Map<Product>(productDto);
+            await _prodcutRepository.CreateProductAsync(item);
+        }
     }
 }

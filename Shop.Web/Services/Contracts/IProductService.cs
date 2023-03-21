@@ -8,5 +8,6 @@ namespace Shop.Web.Services.Contracts
         Task<ProductDto> GetProductsByIdAsync(int id);
         Task DeleteProductById(ProductDto product);
         Task UpdateProductById(int id, ProductDto product);
+        Task CreateProduct(ProductDto productDto);
     }
 }

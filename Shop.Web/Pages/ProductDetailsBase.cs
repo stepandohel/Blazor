@@ -4,7 +4,7 @@ using Shop.Web.Services.Contracts;
 
 namespace Shop.Web.Pages
 {
-    public class ProductDetailsBase :  ComponentBase
+    public class ProductDetailsBase : ComponentBase
     {
         [Parameter]
         public int Id { get; set; }

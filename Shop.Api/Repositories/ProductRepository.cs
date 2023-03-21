@@ -14,6 +14,12 @@ namespace Shop.Api.Repositories
             _appDBContext = appDBContext;
         }
 
+        public async Task CreateProductAsync(Product product)
+        {
+            await _appDBContext.Products.AddAsync(product);
+            await _appDBContext.SaveChangesAsync();
+        }
+
         public async Task DeleteProductAsync(int id)
         {
             var item = await _appDBContext.Products.FindAsync(id);
@@ -21,19 +27,9 @@ namespace Shop.Api.Repositories
             await _appDBContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ProductCategory>> GetAllCategoriesAsync()
-        {
-            return await _appDBContext.ProductCategories.ToListAsync();
-        }
-
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
             return await _appDBContext.Products.Include(x => x.ProductCategory).ToListAsync();
-        }
-
-        public Task<ProductCategory> GetCategoryByIdAsync(int id)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<Product> GetProductByIdAsync(int id)
@@ -43,8 +39,7 @@ namespace Shop.Api.Repositories
 
         public async Task UpdateProductAsync(int id, Product product)
         {
-            var itemOnUpdate = await _appDBContext.Products.FindAsync(id);
-            itemOnUpdate = product;
+            _appDBContext.Products.Update(product);
             await _appDBContext.SaveChangesAsync();
         }
     }

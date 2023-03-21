@@ -14,10 +14,10 @@ namespace Shop.Web.Pages
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
-        public ProductDto Product { get; set; } 
+        public ProductDto Product { get; set; }
         public ProductDto updatedProduct { get; set; } = new ProductDto();
 
-        public EditContext editContext ;
+        public EditContext editContext;
 
         public bool _isInit;
 
@@ -25,13 +25,21 @@ namespace Shop.Web.Pages
         {
             Product = await productService.GetProductsByIdAsync(Id);
             editContext = new(Product);
-            _isInit=true;
+            _isInit = true;
         }
 
         protected async Task UpdateProduct_Click()
         {
-            await productService.UpdateProductById(Id,Product);
+            await productService.UpdateProductById(Id, Product);
             NavigationManager.NavigateTo("/");
+        }
+        protected async void OnFileSelected(InputFileChangeEventArgs e)
+        {
+            using (var fs = File.Create($"D:\\Projects\\Internship\\Blazor\\" + e.File.Name))
+            {
+                var sad= e.GetMultipleFiles().First();
+                await sad.OpenReadStream().CopyToAsync(fs);
+            }
         }
     }
 }

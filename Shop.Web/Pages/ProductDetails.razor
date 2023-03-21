@@ -1,7 +1,7 @@
 ﻿@page "/ProductDetails/{Id:int}"
 @inherits ProductDetailsBase
 
-@if(Product==null)
+@if (Product == null)
 {
     <DisplaySpinner />
 }
@@ -32,7 +32,7 @@ else
                 <button class="btn btn-access"
                     @onclick="()=> SendToUpdateForm_Click(Product.Id)">
                     <b>
-                        Delete
+                        Update
                     </b>
                 </button>
             </div>

@@ -8,8 +8,6 @@ namespace Shop.Api.Repositories.Contracts
         Task<Product> GetProductByIdAsync(int id);
         Task UpdateProductAsync(int id, Product product);
         Task DeleteProductAsync(int id);
-        Task<IEnumerable<ProductCategory>> GetAllCategoriesAsync();
-
-        Task<ProductCategory> GetCategoryByIdAsync(int id); 
+        Task CreateProductAsync(Product product);
     }
 }
