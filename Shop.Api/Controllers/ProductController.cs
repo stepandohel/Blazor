@@ -2,7 +2,7 @@
 using Domain.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Models.Dtos;
-using Shop.Api.Repositories.Contracts;
+using Shop.Api.Repositories;
 
 namespace Shop.Api.Controllers
 {
@@ -11,28 +11,28 @@ namespace Shop.Api.Controllers
 
     public class ProductController : ControllerBase
     {
-        private readonly IProductRepository _prodcutRepository;
+        private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public ProductController(IProductRepository prodcutRepository, IMapper mapper)
+        public ProductController(UnitOfWork unitOfWork, IMapper mapper)
         {
-            _prodcutRepository = prodcutRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsAsync()
         {
-            var items =  await _prodcutRepository.GetAllProductsAsync();
+            var items = await _unitOfWork.ProductRepository.GetAllAsync();
             var returnedItems = _mapper.Map<List<ProductDto>>(items);
-            
+
             return Ok(returnedItems);
         }
 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<ProductDto>> GetProductByIdAsync(int id)
         {
-            var items = await _prodcutRepository.GetProductByIdAsync(id);
+            var items = await _unitOfWork.ProductRepository.GetByIdAsync(id);
             var returnedItems = _mapper.Map<ProductDto>(items);
 
             return Ok(returnedItems);
@@ -41,7 +41,8 @@ namespace Shop.Api.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteProductById(int id)
         {
-            await _prodcutRepository.DeleteProductAsync(id);
+            await _unitOfWork.ProductRepository.DeleteAsync(id);
+            await _unitOfWork.SaveChangesAsync();
             return (NoContent());
         }
 
@@ -49,14 +50,16 @@ namespace Shop.Api.Controllers
         public async Task UpdateProduct(int id, ProductDto productDto)
         {
             var item = _mapper.Map<Product>(productDto);
-            await _prodcutRepository.UpdateProductAsync(id, item);
+            _unitOfWork.ProductRepository.Update(item);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         [HttpPost]
         public async Task CreateProduct(ProductDto productDto)
         {
             var item = _mapper.Map<Product>(productDto);
-            await _prodcutRepository.CreateProductAsync(item);
+            await _unitOfWork.ProductRepository.CreateAsync(item);
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using Models.Dtos;
 using Shop.Web.Services.Contracts;
 
-namespace Shop.Web.Pages
+namespace Shop.Web.PageComponent
 {
     public class ProductFromBase : ComponentBase
     {
@@ -17,14 +16,12 @@ namespace Shop.Web.Pages
         public ProductDto Product { get; set; }
         public ProductDto updatedProduct { get; set; } = new ProductDto();
 
-        public EditContext editContext;
 
         public bool _isInit;
 
         protected override async Task OnInitializedAsync()
         {
             Product = await productService.GetProductsByIdAsync(Id);
-            editContext = new(Product);
             _isInit = true;
         }
 
@@ -32,14 +29,6 @@ namespace Shop.Web.Pages
         {
             await productService.UpdateProductById(Id, Product);
             NavigationManager.NavigateTo("/");
-        }
-        protected async void OnFileSelected(InputFileChangeEventArgs e)
-        {
-            using (var fs = File.Create($"D:\\Projects\\Internship\\Blazor\\" + e.File.Name))
-            {
-                var sad= e.GetMultipleFiles().First();
-                await sad.OpenReadStream().CopyToAsync(fs);
-            }
         }
     }
 }

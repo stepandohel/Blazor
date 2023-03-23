@@ -15,7 +15,7 @@ namespace Shop.Web.Services
 
         public async Task CreateProduct(ProductDto productDto)
         {
-           var res = await _httpClient.PostAsJsonAsync<ProductDto>("api/Product", productDto);
+            var res = await _httpClient.PostAsJsonAsync<ProductDto>("api/Product", productDto);
         }
 
         public async Task DeleteProductById(ProductDto product)

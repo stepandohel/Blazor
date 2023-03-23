@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Models.Dtos;
 
-namespace Shop.Web.Pages
+namespace Shop.Web.PageComponent
 {
     public class DisplayProductsBase : ComponentBase
     {

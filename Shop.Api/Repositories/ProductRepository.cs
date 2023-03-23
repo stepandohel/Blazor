@@ -5,7 +5,7 @@ using Shop.Api.Repositories.Contracts;
 
 namespace Shop.Api.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : IRepository<Product>
     {
         private readonly AppDBContext _appDBContext;
 
@@ -14,33 +14,30 @@ namespace Shop.Api.Repositories
             _appDBContext = appDBContext;
         }
 
-        public async Task CreateProductAsync(Product product)
+        public async Task CreateAsync(Product product)
         {
             await _appDBContext.Products.AddAsync(product);
-            await _appDBContext.SaveChangesAsync();
         }
 
-        public async Task DeleteProductAsync(int id)
+        public async Task DeleteAsync(int id)
         {
             var item = await _appDBContext.Products.FindAsync(id);
             _appDBContext.Products.Remove(item);
-            await _appDBContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        public async Task<IEnumerable<Product>> GetAllAsync()
         {
             return await _appDBContext.Products.Include(x => x.ProductCategory).ToListAsync();
         }
 
-        public async Task<Product> GetProductByIdAsync(int id)
+        public async Task<Product> GetByIdAsync(int id)
         {
             return await _appDBContext.Products.Include(x => x.ProductCategory).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task UpdateProductAsync(int id, Product product)
+        public void Update(Product product)
         {
             _appDBContext.Products.Update(product);
-            await _appDBContext.SaveChangesAsync();
         }
     }
 }
